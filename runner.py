@@ -109,7 +109,7 @@ def get_latest_otp_from_gmail(user: str, password: str, logger: LogFn, sender: s
                 continue
             raw = msg_data[0][1]
             msg = message_from_bytes(raw, policy=policy.default)
-            body = _extract_text(msg).replace("", "")
+            body = _extract_text(msg).replace('\r', '')
             match = re.search(r"(\d{4,10})", body)
             if match:
                 otp = match.group(1)
